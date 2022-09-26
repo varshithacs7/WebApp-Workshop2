@@ -82,6 +82,6 @@ One Day workshop on understanding the Nestjs framework and to build the basic CR
 
 ## What will you learn by the end of this workshop?
 - By the end of this workshop you will understand Nest framework structure.
-- Controllers, Modules and Services of NesjJS
+- Controller, Module and Service in NesjJS
 - Connection to Database
 - Basic CRUD operation with NestJS
