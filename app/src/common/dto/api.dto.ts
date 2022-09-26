@@ -1,14 +1,10 @@
-export class responseObject {
-    status: string;
-    message: string;
-}
+// export class responseObject {
+    
+// }
 
-export class deleteUser {
-    emailId: string;
-}
+// export class deleteUser {
+   
+// }
 
-export class getUser {
-    status: string;
-    message: string;
-    data?: object;
-}
+// export class getUser {
+// }
