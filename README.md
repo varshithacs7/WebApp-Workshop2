@@ -1,4 +1,4 @@
-## WebApp-Workshop2
+## NodeJS workshop
 
 One Day workshop on understanding the Nestjs framework and to build the basic CRUD operation with postgres database.
 
