@@ -15,4 +15,4 @@ COPY ./app/package.json .
 RUN npm install
 COPY ./app .
 
-EXPOSE 3000 5555
+EXPOSE 3000
