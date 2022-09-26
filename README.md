@@ -6,9 +6,10 @@ One Day workshop on understanding the Nestjs framework and to build the basic CR
 1. Basic knowledge of docker and docker-compose
 2. Basics of express-app
    1. Which is covered in [Workshop 1](https://github.com/UniCourt/WebApp-Workshop1) <span style="color:gray">Go through this repo if you haven't completed it</span>
-3. Tools to download
-   1. Insomnia: Simple API client for REST
-   2. [Download link](https://insomnia.rest/download)
+3. preferred Tools:
+   1. IDE: VS Code - [Download Link](https://linuxize.com/post/how-to-install-visual-studio-code-on-ubuntu-20-04/)
+   <br><span style="color:green">Note: Install using apt </span>
+   3. API client for REST : **Insomnia** - [Download link](https://insomnia.rest/download)
    
 ### Github - respository clone
 1. Fork [Workshop2](https://github.com/UniCourt/WebApp-Workshop2) repository into your account.
