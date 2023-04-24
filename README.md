@@ -1,88 +1,66 @@
-## NodeJS workshop
+# NestJS Workshop
+Workshop on understanding NestJS framework for building efficient, scalable Node.js server-side applications with Micro-Service Architecture. Nest fully supports TypeScript (yet still enables developers to code in pure JavaScript) and combines elements of OOP (Object Oriented Programming), FP (Functional Programming), and FRP (Functional Reactive Programming).
 
-One Day workshop on understanding the Nestjs framework and to build the basic CRUD operation with postgres database.
+> **Info:**
+> You can refer NestJS [doc](https://docs.nestjs.com/) to learn more about the framework.
 
 ## Prerequisite
-1. Basic knowledge of docker and docker-compose
-2. Basics of express-app
-   1. Which is covered in [Workshop 1](https://github.com/UniCourt/WebApp-Workshop1) <span style="color:gray">Go through this repo if you haven't completed it</span>
-3. preferred Tools:
-   1. IDE: VS Code - [Download Link](https://linuxize.com/post/how-to-install-visual-studio-code-on-ubuntu-20-04/)
-   <br><span style="color:green">Note: Install using apt </span>
-   3. API client for REST : **Insomnia** - [Download link](https://insomnia.rest/download)
-   
-### Github - respository clone
-1. Fork [Workshop2](https://github.com/UniCourt/WebApp-Workshop2) repository into your account.
-2. Clone repo into your local machine run the follwing commands
-   1. Create a folder `GITHUB` 
-   ```
-   $ mkdir GITHUB
-   $ cd GITHUB
-   ```
-   2. Clone your repository 
-   ```
-   $ git clone git@github.com:<your-username>/WebApp-Workshop2.git
-   ```
-   <span style="color:red">Note</span> WebApp-Workhop2 folder is created. 
-   ```
-   $ cd WebApp-Workshop2
-   ```
-   1. Add upstream
-   ```
-   $ git remote add upstream git@github.com:UniCourt/WebApp-Workshop2.git
-   ```
-   1. Create a branch called `dev` in your local
-   ```
-   $ git fetch --all
-   $ git checkout -b dev upstream/main
-   ```
 
-### NestJS - Application setup with Docker
-1. Open terminal and naviagte to `/GITHUB/WebApp-Workshop2/`
-2. Build the docker images
-   ```
-   $ docker-compose build --no-cache
-   ```
-3. Setup Postgres
-   1. Bring up the Postgres docker service
-   ```
-   $ docker-compose up -d service-workshop-postgres
-   ```
-   2. Import database schema
-   ```
-   $ docker exec -i workshop-postgres psql -h localhost -U workshop_user -d nest_app < database/master.sql
-   ```
-   3. You should get a message `CREATE TABLE`
-   4. Verify by logging into the database
-   ```
-   $ docker exec -ti workshop-postgres psql -h localhost -U workshop_user -d nest_app
+### Prerequisite from **Workshop1** are required
+   1. Ubuntu 22.04 LTS Linux machine
+   2. Git and GitHub account configured with SSH key
+   3. Docker and Docker Compose.
+   4. If anything is missing please check the Prerequisite of Workshop1. [click here](https://github.com/UniCourt/WebApp-Workshop1/blob/main/README.md)
 
-   nest_app=# \d
-   ```
-   5. <span style="color:red">Note: </span> The command `\d` will list all the relations.
-4. Bring up the NestJS Application
-5. Open new tab in the terminal `/GITHUB/WebApp-Workshop2/`
-6. Bring up the NestJS and Postgres application using docker-compose
-   ```
-   $ docker-compose up -d
-   ```
-7. Execute into NestJS container to run the server
-   ```
-   $ docker exec -ti workshop-nestjs /bin/sh
+### GitHub
+   1. Fork the [current](https://github.com/UniCourt/WebApp-Workshop2) repository.
+   2. Clone your forked repository inside the `WORKSHOP` directory which was created during Workshop1.
 
-   /app # npm run start:dev
-   ```
-8. Open http://localhost:3000 on your browser
-9. You will get a message
-   <h3><span style="color:green;">Hello from NESTJS <3</h3>
+### Docker
+   1. Download the follwing docker images to your local machine
+      -  ```
+         docker pull node:18.16.0-alpine3.17
+         ```
+         -  Verify the image is pulled into your local machine
+            ``` 
+            docker run --rm -ti node:18.16.0-alpine3.17 node -v
+            ```
+            Output: **v18.16.0**
+      -  ```
+         docker pull postgres:14
+         ```
+         -  Verify the image
+            ```
+            docker run --rm -ti postgres:14  psql -V
+            ```
+            Output: **psql (PostgreSQL) 14.5**
+      -  ```
+         docker pull dpage/pgadmin4
+         ```
+   2. Build all the docker images mentioned in `docker-compose` file. Follow the below steps.
+      -  Build all the docker images by runningthe below command.
+         ```
+         docker-compose build
+         ```
+      -  Verify if all the containers start after the build is completed by running the below command.
+         ```
+         docker-compose up
+         ```
 
-10. To close the application open new tab in the terminal `/GITHUB/WebApp-Workshop2/`
-    ```
-    $ docker-compose down
-    ```
+### Postman Installation
+   1. Postman app is **required** to use the *API Collection* for testing the API's during the development.
+      -  [Install Postman](https://www.postman.com/downloads/)
 
 ## What will you learn by the end of this workshop?
-- By the end of this workshop you will understand Nest framework structure.
-- Controller, Module and Service in NesjJS
-- Connection to Database
-- Basic CRUD operation with NestJS
+- In this workshop you will understand and learn about NestJS framework which is a progressive Node.js framework used for building scalable server-side applications.
+- You will know the concepts of Micro-Service.
+- Build an Blog application API's for frontend using NestJS.
+
+## **Schedule**
+| Time                    |   Topics
+| --                      |   --
+| 09:00 - 10:15           |  NestJS Controller Working
+| 10:15 - 10:30           |  [ `Tea Break` ]
+| 10:30 - 01:00           |  NestJS Micro-Service Working
+| 1:00  - 2:00            |  [ `Break` ]
+| 2:00  - 5:00            |  NestJS Micro-Service Working

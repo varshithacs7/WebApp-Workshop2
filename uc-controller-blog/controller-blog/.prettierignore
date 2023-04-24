@@ -1,0 +1,13 @@
+# Ignore artifacts: 
+build 
+coverage
+
+# Ignore files:
+*.js
+*.md
+*.env
+*.psql
+*.yml
+*.yaml
+.npmrc
+Dockerfile
