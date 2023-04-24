@@ -47,6 +47,11 @@ Workshop on understanding NestJS framework for building efficient, scalable Node
          docker-compose up
          ```
 
+### Required VS Code Extensions
+   -  [Install](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) `ESLint` extension on your VS Code.
+   -  [Install](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) `Prettier - Code formatter` extension on your VS Code.
+   -  [Install](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma) `Prisma` extension on your VS Code.
+
 ### Postman Installation
    1. Postman app is **required** to use the *API Collection* for testing the API's during the development.
       -  [Install Postman](https://www.postman.com/downloads/)
