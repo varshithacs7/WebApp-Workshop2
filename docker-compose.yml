@@ -16,7 +16,8 @@ services:
         networks:
             uc_network:
         env_file:
-            - .env/auth.env
+            - .env/blog.env
+            - .env/db.env
         volumes:
             - ./uc-controller-blog/controller-blog:/home/uc_user/controller-blog
             - /home/uc_user/controller-blog/node_modules/
@@ -38,8 +39,8 @@ services:
         networks:
             uc_network:
         env_file:
-            - .env/prisma.env
             - .env/blog.env
+            - .env/db.env
         volumes:
             - ./uc-ms-blog/blog-service:/home/uc_user/blog-service
             - /home/uc_user/blog-service/prisma/prismaAuthUserClient
@@ -52,7 +53,7 @@ services:
         image: postgres:14
         networks:
             uc_network:
-                ipv4_address: 30.3.1.201
+                ipv4_address: 30.7.1.201
         env_file:
             - .env/db.env
         ports:
@@ -78,7 +79,7 @@ networks:
         ipam:
             driver: default
             config:
-                - subnet: 30.3.0.0/16
+                - subnet: 30.7.0.0/16
 
 volumes:
     ucWorkshopPgData:
