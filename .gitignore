@@ -1,2 +1,4 @@
-/**/dist
-/**/node_modules
+uc-controller-blog/controller-blog/dist
+uc-controller-blog/controller-blog/node_modules
+uc-ms-blog/blog-service/dist
+uc-ms-blog/blog-service/node_modules

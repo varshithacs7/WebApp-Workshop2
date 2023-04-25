@@ -1,0 +1,572 @@
+{
+	"info": {
+		"_postman_id": "1b20ba04-63c1-4735-91be-933f7fcca6ec",
+		"name": "UniCourt Workshop Blog API's",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8917849"
+	},
+	"item": [
+		{
+			"name": "Blog Entry",
+			"item": [
+				{
+					"name": "Upload Blog Entry Image (Protected)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{appURL}}/blog-entries/image/upload",
+							"host": [
+								"{{appURL}}"
+							],
+							"path": [
+								"blog-entries",
+								"image",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download Blog Entry Image",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{appURL}}/blog-entries/image/Download770320c0-2b30-443a-8c14-2d58f58e7279.jpg",
+							"host": [
+								"{{appURL}}"
+							],
+							"path": [
+								"blog-entries",
+								"image",
+								"Download770320c0-2b30-443a-8c14-2d58f58e7279.jpg"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Blog Entries Paginated",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{appURL}}/blog-entries",
+							"host": [
+								"{{appURL}}"
+							],
+							"path": [
+								"blog-entries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Blog Entry (Protected)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{appURL}}/blog-entries/15",
+							"host": [
+								"{{appURL}}"
+							],
+							"path": [
+								"blog-entries",
+								"15"
+							]
+						},
+						"description": "Only the author of a blog entry can delete the blogEntry"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Blog Entries by User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{appURL}}/blog-entries/user/7",
+							"host": [
+								"{{appURL}}"
+							],
+							"path": [
+								"blog-entries",
+								"user",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Blog Entry (Protected)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"updated title again\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{appURL}}/blog-entries/16",
+							"host": [
+								"{{appURL}}"
+							],
+							"path": [
+								"blog-entries",
+								"16"
+							]
+						},
+						"description": "Only the author can update a blogEntry"
+					},
+					"response": []
+				},
+				{
+					"name": "FindOne() Blog Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{appURL}}/blog-entries/14",
+							"host": [
+								"{{appURL}}"
+							],
+							"path": [
+								"blog-entries",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Blog Entries by User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{appURL}}/blog-entries/user/7",
+							"host": [
+								"{{appURL}}"
+							],
+							"path": [
+								"blog-entries",
+								"user",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Blog Entry (Protected)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Test Title7\",\r\n    \"description\": \"test description7\",\r\n    \"body\": \"test body7\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{appURL}}/blog-entries",
+							"host": [
+								"{{appURL}}"
+							],
+							"path": [
+								"blog-entries"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get All Users (Protected)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{appURL}}/users",
+							"host": [
+								"{{appURL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add New User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Jason Test\",\n\t\"username\": \"Jason5\",\n\t\"email\": \"jasonm@unicourt.com\",\n\t\"password\": \"asd\",\n\t\"role\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{appURL}}/users/",
+							"host": [
+								"{{appURL}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{appURL}}/users/7",
+							"host": [
+								"{{appURL}}"
+							],
+							"path": [
+								"users",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete One (Protected)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{appURL}}/users/14",
+							"host": [
+								"{{appURL}}"
+							],
+							"path": [
+								"users",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update One (Protected)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"updatedName5\",\n\t\"username\": \"updatedUsername\",\n\t\"email\": \"shouldNotWork\",\n\t\"password\": \"shouldNotwork\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{appURL}}/users/7",
+							"host": [
+								"{{appURL}}"
+							],
+							"path": [
+								"users",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"jasonm@unicourt.com\",\n\t\"password\": \"asd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{appURL}}/users/login",
+							"host": [
+								"{{appURL}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Role of User (Protected)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"role\": \"editor\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{appURL}}/users/3/role",
+							"host": [
+								"{{appURL}}"
+							],
+							"path": [
+								"users",
+								"3",
+								"role"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Profile Picture (Protected)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{appURL}}/users/upload",
+							"host": [
+								"{{appURL}}"
+							],
+							"path": [
+								"users",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download Prfoile Image",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{appURL}}/users/profile-image/ThumbnailNEU288bce28-3aa5-43b7-a848-8630c2f57c3d.png",
+							"host": [
+								"{{appURL}}"
+							],
+							"path": [
+								"users",
+								"profile-image",
+								"ThumbnailNEU288bce28-3aa5-43b7-a848-8630c2f57c3d.png"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "appURL",
+			"value": "http://localhost:3007/api",
+			"type": "string"
+		},
+		{
+			"key": "authToken",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo3LCJuYW1lIjoidXBkYXRlZE5hbWU2NTU1YWEiLCJ1c2VybmFtZSI6InVwZGF0ZWRVc2VybmFtZWQiLCJlbWFpbCI6InRob21hc0B0ZXN0NS5kZSIsInJvbGUiOiJhZG1pbiIsInByb2ZpbGVJbWFnZSI6ImJpZ2ZpbGUwOWQxNTY0Ny0wMzBlLTRlMzEtODFmYy0yZmMzNGVhMjQ2MmUucG5nIn0sImlhdCI6MTU5NzU3ODM1MywiZXhwIjoxNTk3NTg4MzUzfQ.VxwfuFApPlfeGCV4QH3gxICQQZWnkhJx4oHTrcvYuck",
+			"type": "string"
+		}
+	]
+}

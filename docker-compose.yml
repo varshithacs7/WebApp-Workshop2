@@ -1,32 +1,85 @@
 version: '3.7'
 services:
-  service-workshop-postgres:
-    container_name: workshop-postgres
-    image: postgres:14-alpine
-    restart: always
-    env_file:
-      - .env
-    ports:
-      - "5431:5432"
-    volumes:
-      - workshop-pg-vol:/var/lib/postgresql/data/
-  
-  service-workshop-nestjs:
-    container_name: workshop-nestjs
-    image: workshop-nestjs:1.0.0
-    build: 
-      context: .
-      dockerfile: docker/Dockerfile
-    env_file:
-      - .env
-    depends_on:
-      - service-workshop-postgres
-    volumes:
-      - ./app/src:/app/src
-      - /app/node_modules/
-    ports:
-      - 3000:3000
-    command: [ "sh", "-c", "while :; do sleep 10; done;" ]
+    # Blog Controller
+    service-uc-controller-blog:
+        container_name: uc-controller-blog
+        image: testing_uc_controller_blog:latest
+        build:
+            context: .
+            dockerfile: uc-controller-blog/docker/Dockerfile
+            target: development
+            args:
+                NODE_ENV: dev
+        ports:
+            - "3007:3007"
+            - "4007:4007"
+        networks:
+            uc_network:
+        env_file:
+            - .env/blog.env
+            - .env/db.env
+        volumes:
+            - ./uc-controller-blog/controller-blog:/home/uc_user/controller-blog
+            - /home/uc_user/controller-blog/node_modules/
+        command: npm run start:debug
+
+    # Blog Micro-Service
+    service-uc-blog:
+        container_name: uc-ms-blog
+        image: testing_uc_ms_blog:latest
+        build:
+            context: .
+            dockerfile: uc-ms-blog/docker/Dockerfile
+            target: development
+            args:
+                NODE_ENV: dev
+        ports:
+            - "3022:3022"
+            - "4022:4022"
+        networks:
+            uc_network:
+        env_file:
+            - .env/blog.env
+            - .env/db.env
+        volumes:
+            - ./uc-ms-blog/blog-service:/home/uc_user/blog-service
+            - /home/uc_user/blog-service/prisma/prismaAuthUserClient
+            - /home/uc_user/blog-service/node_modules/
+        command: npm run start:debug
+
+    # postgresql
+    service-uc-postgres:
+        container_name: uc-workshop-postgres
+        image: postgres:14
+        networks:
+            uc_network:
+                ipv4_address: 30.7.1.201
+        env_file:
+            - .env/db.env
+        ports:
+            - 5438:5432
+        volumes:
+            - ucWorkshopPgData:/var/lib/postgresql/data
+
+    # pgadmin
+    service-uc-pgadmin:
+        container_name: uc-workshop-pgadmin
+        image: dpage/pgadmin4
+        environment:
+            PGADMIN_DEFAULT_EMAIL: admin@admin.com
+            PGADMIN_DEFAULT_PASSWORD: root
+        ports:
+            - 5050:80
+        networks:
+            uc_network:
+
+networks:
+    uc_network:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 30.7.0.0/16
 
 volumes:
-  workshop-pg-vol:
+    ucWorkshopPgData:
