@@ -3,9 +3,9 @@ import { Observable, of, from } from 'rxjs';
 import { BlogEntry } from '../model/blog-entry.interface';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BlogEntryEntity } from '../model/blog-entry.entity';
-import { Repository } from 'typeorm';
+import { Repository, Equal} from 'typeorm';
 import { User } from '../../user/models/user.interface';
-import { switchMap, map, tap } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
 import { Pagination, IPaginationOptions, paginate } from 'nestjs-typeorm-paginate';
 import slugify from 'slugify';
 
@@ -44,7 +44,7 @@ export class BlogService {
         return from(paginate<BlogEntry>(this.blogRepository, options, {
             relations: ['author'],
             where: [
-                {author: Number(userId)}
+                {author: Equal(userId)}
             ]
         })).pipe(
             map((blogEntries: Pagination<BlogEntry>) => blogEntries)
@@ -52,13 +52,13 @@ export class BlogService {
     }
 
     findOne(id: number): Observable<BlogEntry> {
-        return from(this.blogRepository.findOne({id}, {relations: ['author']}));
+        return from(this.blogRepository.findOne({where:{id},relations: ['author']}));
     }
 
     findByUser(userId: number): Observable<BlogEntry[]> {
         return from(this.blogRepository.find({
             where: {
-                author: userId
+                author: Equal(userId)
             },
             relations: ['author']
         })).pipe(map((blogEntries: BlogEntry[]) => blogEntries))

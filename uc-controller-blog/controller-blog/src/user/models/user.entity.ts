@@ -28,7 +28,7 @@ export class UserEntity {
     @Column({nullable: true})
     profileImage: string;
 
-    @OneToMany(type => BlogEntryEntity, blogEntryEntity => blogEntryEntity.author)
+    @OneToMany(() => BlogEntryEntity, blogEntryEntity => blogEntryEntity.author)
     blogEntries: BlogEntryEntity[];
 
     @BeforeInsert()
