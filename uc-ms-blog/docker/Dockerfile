@@ -8,8 +8,6 @@ LABEL maintainer="UniCourt Workshop <unicourt.com>" \
 
 WORKDIR /home/uc_user/blog-service
 
-COPY uc-ms-blog/docker/prisma.sh ./
-
 COPY uc-ms-blog/blog-service/package.json ./
 
 COPY uc-ms-blog/blog-service/.npmrc ./

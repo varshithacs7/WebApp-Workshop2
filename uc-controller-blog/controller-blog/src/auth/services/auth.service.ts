@@ -1,25 +1,49 @@
-import { Injectable } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { Observable, from, of } from 'rxjs';
-import { User } from 'src/user/models/user.interface';
-import bcrypt from 'bcrypt';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { Observable, from } from "rxjs";
+import { map } from "rxjs/operators";
+import { UserEntity } from "../../entities/user.entity";
+import { User } from "../../dto/user.dto";
 
 @Injectable()
 export class AuthService {
+    constructor(@InjectRepository(UserEntity) private readonly authUser: Repository<UserEntity>) {}
 
-    constructor(private readonly jwtService: JwtService){}
+    checkUserHasRoleAndPermission(user: User, roles: any): Observable<any> {
+        return this.findOne(user.id).pipe(
+            map((user: User) => {
+                const hasRole = () => roles.indexOf(user.role) > -1;
+                let hasPermission: boolean = false;
 
-    generateJWT(user: User): Observable <string> {
-        return from(this.jwtService.signAsync({user}));
+                if (hasRole()) {
+                    hasPermission = true;
+                }
+                return user && hasPermission;
+            })
+        );
     }
 
-    hashPassword(password: string): Observable <string> {
-        return from<string>(bcrypt.hash(password, 12));
+    checkUserAndPermission(user: User, params: any): Observable<any> {
+        return this.findOne(user.id).pipe(
+            map((user: User) => {
+                let hasPermission = false;
 
+                if (user.id === Number(params.id)) {
+                    hasPermission = true;
+                }
+
+                return user && hasPermission;
+            })
+        );
     }
 
-    comparePasswords(newPassword: string, passwortHash: string): Observable<any>{
-        return from(bcrypt.compare(newPassword, passwortHash));
+    findOne(id: number): Observable<User> {
+        return from(this.authUser.findOne({ relations: ["blogEntries"], where: { id } })).pipe(
+            map((user: User) => {
+                const { password, ...result } = user;
+                return result;
+            })
+        );
     }
-
 }

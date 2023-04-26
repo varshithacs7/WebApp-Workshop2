@@ -297,13 +297,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{appURL}}/users/",
+							"raw": "{{appURL}}/users/create",
 							"host": [
 								"{{appURL}}"
 							],
 							"path": [
 								"users",
-								""
+								"create"
 							]
 						}
 					},
@@ -565,7 +565,7 @@
 		},
 		{
 			"key": "authToken",
-			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo3LCJuYW1lIjoidXBkYXRlZE5hbWU2NTU1YWEiLCJ1c2VybmFtZSI6InVwZGF0ZWRVc2VybmFtZWQiLCJlbWFpbCI6InRob21hc0B0ZXN0NS5kZSIsInJvbGUiOiJhZG1pbiIsInByb2ZpbGVJbWFnZSI6ImJpZ2ZpbGUwOWQxNTY0Ny0wMzBlLTRlMzEtODFmYy0yZmMzNGVhMjQ2MmUucG5nIn0sImlhdCI6MTU5NzU3ODM1MywiZXhwIjoxNTk3NTg4MzUzfQ.VxwfuFApPlfeGCV4QH3gxICQQZWnkhJx4oHTrcvYuck",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiSmFzb24gVGVzdCIsInVzZXJuYW1lIjoiSmFzb241IiwiZW1haWwiOiJqYXNvbm1AdW5pY291cnQuY29tIiwicm9sZSI6InVzZXIiLCJwcm9maWxlSW1hZ2UiOm51bGx9LCJpYXQiOjE2ODI0OTEwNzMsImV4cCI6MTY4MjUwMTA3M30.GfviEHHb2rVmduaBZSPR3F1YB06_eTyl0UUg79EvlrM",
 			"type": "string"
 		}
 	]
