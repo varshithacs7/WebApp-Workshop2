@@ -6,14 +6,5 @@ export class User {
     username?: string;
     email?: string;
     password?: string;
-    role?: UserRole;
-    profileImage?: string;
     blogEntries?: BlogEntry[];
-}
-
-export enum UserRole {
-    ADMIN = "admin",
-    CHIEFEDITOR = "chiefeditor",
-    EDITOR = "editor",
-    USER = "user",
 }

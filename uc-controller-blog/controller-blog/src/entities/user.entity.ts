@@ -1,5 +1,4 @@
 import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, OneToMany } from "typeorm";
-import { UserRole } from "../dto/user.dto";
 import { BlogEntryEntity } from "./blog-entry.entity";
 
 @Entity()
@@ -18,12 +17,6 @@ export class UserEntity {
 
     @Column({ select: false })
     password: string;
-
-    @Column({ type: "enum", enum: UserRole, default: UserRole.USER })
-    role: UserRole;
-
-    @Column({ nullable: true })
-    profileImage: string;
 
     @OneToMany(() => BlogEntryEntity, blogEntryEntity => blogEntryEntity.author)
     blogEntries: BlogEntryEntity[];

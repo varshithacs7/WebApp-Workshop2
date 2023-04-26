@@ -10,7 +10,6 @@ export class BlogEntry {
     updatedAt?: Date;
     likes?: number;
     author?: User;
-    headerImage?: string;
     publishedDate?: Date;
     isPublished?: boolean;
 }

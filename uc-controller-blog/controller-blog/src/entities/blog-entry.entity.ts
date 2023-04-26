@@ -33,9 +33,6 @@ export class BlogEntryEntity {
     likes: number;
 
     @Column({ nullable: true })
-    headerImage: string;
-
-    @Column({ nullable: true })
     publishedDate: Date;
 
     @Column({ nullable: true })

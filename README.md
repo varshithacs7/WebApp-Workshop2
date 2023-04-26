@@ -50,7 +50,6 @@ Workshop on understanding NestJS framework for building efficient, scalable Node
 ### Required VS Code Extensions
    -  [Install](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) `ESLint` extension on your VS Code.
    -  [Install](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) `Prettier - Code formatter` extension on your VS Code.
-   -  [Install](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma) `Prisma` extension on your VS Code.
 
 ### Postman Installation
    1. Postman app is **required** to use the *API Collection* for testing the API's during the development.
@@ -64,8 +63,8 @@ Workshop on understanding NestJS framework for building efficient, scalable Node
 ## **Schedule**
 | Time                    |   Topics
 | --                      |   --
-| 09:00 - 10:15           |  NestJS Controller Working
+| 09:00 - 10:15           |  NestJS Working
 | 10:15 - 10:30           |  [ `Tea Break` ]
-| 10:30 - 01:00           |  NestJS Micro-Service Working
+| 10:30 - 01:00           |  NestJS Working
 | 1:00  - 2:00            |  [ `Break` ]
-| 2:00  - 5:00            |  NestJS Micro-Service Working
+| 2:00  - 5:00            |  NestJS Working

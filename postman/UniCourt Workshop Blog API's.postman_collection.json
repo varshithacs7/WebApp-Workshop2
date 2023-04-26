@@ -10,7 +10,7 @@
 			"name": "Blog Entry",
 			"item": [
 				{
-					"name": "Upload Blog Entry Image (Protected)",
+					"name": "Create Blog (Protected)",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -25,122 +25,29 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "file",
-									"type": "file",
-									"src": []
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Test Title1\",\r\n    \"description\": \"test description1\",\r\n    \"body\": \"test body1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							]
+							}
 						},
 						"url": {
-							"raw": "{{appURL}}/blog-entries/image/upload",
+							"raw": "{{appURL}}/blog-entries/create",
 							"host": [
 								"{{appURL}}"
 							],
 							"path": [
 								"blog-entries",
-								"image",
-								"upload"
+								"create"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Download Blog Entry Image",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{appURL}}/blog-entries/image/Download770320c0-2b30-443a-8c14-2d58f58e7279.jpg",
-							"host": [
-								"{{appURL}}"
-							],
-							"path": [
-								"blog-entries",
-								"image",
-								"Download770320c0-2b30-443a-8c14-2d58f58e7279.jpg"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get All Blog Entries Paginated",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": []
-						},
-						"url": {
-							"raw": "{{appURL}}/blog-entries",
-							"host": [
-								"{{appURL}}"
-							],
-							"path": [
-								"blog-entries"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Blog Entry (Protected)",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{authToken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{appURL}}/blog-entries/15",
-							"host": [
-								"{{appURL}}"
-							],
-							"path": [
-								"blog-entries",
-								"15"
-							]
-						},
-						"description": "Only the author of a blog entry can delete the blogEntry"
-					},
-					"response": []
-				},
-				{
-					"name": "Get All Blog Entries by User",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{appURL}}/blog-entries/user/7",
-							"host": [
-								"{{appURL}}"
-							],
-							"path": [
-								"blog-entries",
-								"user",
-								"7"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update Blog Entry (Protected)",
+					"name": "Update One Blog (Protected)",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -178,44 +85,7 @@
 					"response": []
 				},
 				{
-					"name": "FindOne() Blog Request",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{appURL}}/blog-entries/14",
-							"host": [
-								"{{appURL}}"
-							],
-							"path": [
-								"blog-entries",
-								"14"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Blog Entries by User",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{appURL}}/blog-entries/user/7",
-							"host": [
-								"{{appURL}}"
-							],
-							"path": [
-								"blog-entries",
-								"user",
-								"7"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create Blog Entry (Protected)",
+					"name": "Delete One Blog (Protected)",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -227,17 +97,45 @@
 								}
 							]
 						},
-						"method": "POST",
+						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Test Title7\",\r\n    \"description\": \"test description7\",\r\n    \"body\": \"test body7\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+						"url": {
+							"raw": "{{appURL}}/blog-entries/2",
+							"host": [
+								"{{appURL}}"
+							],
+							"path": [
+								"blog-entries",
+								"2"
+							]
 						},
+						"description": "Only the author of a blog entry can delete the blogEntry"
+					},
+					"response": []
+				},
+				{
+					"name": "Find One Blog",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{appURL}}/blog-entries/2",
+							"host": [
+								"{{appURL}}"
+							],
+							"path": [
+								"blog-entries",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All Blog",
+					"request": {
+						"method": "GET",
+						"header": [],
 						"url": {
 							"raw": "{{appURL}}/blog-entries",
 							"host": [
@@ -249,6 +147,25 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Find All Blog by User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{appURL}}/blog-entries/user/1",
+							"host": [
+								"{{appURL}}"
+							],
+							"path": [
+								"blog-entries",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -256,40 +173,13 @@
 			"name": "User",
 			"item": [
 				{
-					"name": "Get All Users (Protected)",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{authToken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{appURL}}/users",
-							"host": [
-								"{{appURL}}"
-							],
-							"path": [
-								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Add New User",
+					"name": "Create User",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Jason Test\",\n\t\"username\": \"Jason5\",\n\t\"email\": \"jasonm@unicourt.com\",\n\t\"password\": \"asd\",\n\t\"role\": \"admin\"\n}",
+							"raw": "{\n\t\"name\": \"Jason Test\",\n\t\"username\": \"Jason5\",\n\t\"email\": \"jasonm@unicourt.com\",\n\t\"password\": \"asd\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -310,53 +200,7 @@
 					"response": []
 				},
 				{
-					"name": "Get Single User",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{appURL}}/users/7",
-							"host": [
-								"{{appURL}}"
-							],
-							"path": [
-								"users",
-								"7"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete One (Protected)",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{authToken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{appURL}}/users/14",
-							"host": [
-								"{{appURL}}"
-							],
-							"path": [
-								"users",
-								"14"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update One (Protected)",
+					"name": "Update One User (Protected)",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -372,7 +216,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"updatedName5\",\n\t\"username\": \"updatedUsername\",\n\t\"email\": \"shouldNotWork\",\n\t\"password\": \"shouldNotwork\"\n}",
+							"raw": "{\n\t\"name\": \"Snehal\",\n\t\"username\": \"snehal\",\n\t\"password\": \"test\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -380,13 +224,59 @@
 							}
 						},
 						"url": {
-							"raw": "{{appURL}}/users/7",
+							"raw": "{{appURL}}/users/1",
 							"host": [
 								"{{appURL}}"
 							],
 							"path": [
 								"users",
-								"7"
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete One User (Protected)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{appURL}}/users/1",
+							"host": [
+								"{{appURL}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find One User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{appURL}}/users/1",
+							"host": [
+								"{{appURL}}"
+							],
+							"path": [
+								"users",
+								"1"
 							]
 						}
 					},
@@ -420,7 +310,7 @@
 					"response": []
 				},
 				{
-					"name": "Update Role of User (Protected)",
+					"name": "Find All Users (Protected)",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -432,83 +322,15 @@
 								}
 							]
 						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"role\": \"editor\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{appURL}}/users/3/role",
-							"host": [
-								"{{appURL}}"
-							],
-							"path": [
-								"users",
-								"3",
-								"role"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Upload Profile Picture (Protected)",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{authToken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "file",
-									"type": "file",
-									"src": []
-								}
-							]
-						},
-						"url": {
-							"raw": "{{appURL}}/users/upload",
-							"host": [
-								"{{appURL}}"
-							],
-							"path": [
-								"users",
-								"upload"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Download Prfoile Image",
-					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{appURL}}/users/profile-image/ThumbnailNEU288bce28-3aa5-43b7-a848-8630c2f57c3d.png",
+							"raw": "{{appURL}}/users",
 							"host": [
 								"{{appURL}}"
 							],
 							"path": [
-								"users",
-								"profile-image",
-								"ThumbnailNEU288bce28-3aa5-43b7-a848-8630c2f57c3d.png"
+								"users"
 							]
 						}
 					},

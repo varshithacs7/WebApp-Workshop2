@@ -23,30 +23,6 @@ services:
             - /home/uc_user/controller-blog/node_modules/
         command: npm run start:debug
 
-    # Blog Micro-Service
-    service-uc-blog:
-        container_name: uc-ms-blog
-        image: testing_uc_ms_blog:latest
-        build:
-            context: .
-            dockerfile: uc-ms-blog/docker/Dockerfile
-            target: development
-            args:
-                NODE_ENV: dev
-        ports:
-            - "3022:3022"
-            - "4022:4022"
-        networks:
-            uc_network:
-        env_file:
-            - .env/blog.env
-            - .env/db.env
-        volumes:
-            - ./uc-ms-blog/blog-service:/home/uc_user/blog-service
-            - /home/uc_user/blog-service/prisma/prismaAuthUserClient
-            - /home/uc_user/blog-service/node_modules/
-        command: npm run start:debug
-
     # postgresql
     service-uc-postgres:
         container_name: uc-workshop-postgres

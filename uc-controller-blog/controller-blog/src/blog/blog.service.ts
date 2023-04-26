@@ -1,34 +1,92 @@
-import { Injectable, Inject } from "@nestjs/common";
-import { ClientProxy } from "@nestjs/microservices";
-import type { Observable } from "rxjs";
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository, Equal } from "typeorm";
+// import { Pagination, IPaginationOptions, paginate } from "nestjs-typeorm-paginate";
+import { Observable, of, from } from "rxjs";
+import { switchMap, map } from "rxjs/operators";
+import slugify from "slugify";
 import { BlogEntry } from "../dto/blog-entry.dto";
-import { Image } from "../dto/image.dto";
+import { BlogEntryEntity } from "../entities/blog-entry.entity";
+import { User } from "../dto/user.dto";
 
 @Injectable()
 export class BlogService {
-    constructor(@Inject("BLOG") private readonly client: ClientProxy) {}
+    blogUrl = "http://localhost:3007/api/blog-entries";
 
-    createBlog(blogEntry, req): Observable<BlogEntry> {
-        return this.client.send("createBlog", { blogEntry, req });
+    constructor(@InjectRepository(BlogEntryEntity) private readonly blogRepository: Repository<BlogEntryEntity>) {}
+
+    generateSlug(title: string): Observable<string> {
+        return of(slugify(title));
     }
 
-    indexBlog(page, limit): Observable<any> {
-        return this.client.send("indexBlog", { page, limit });
+    createBlog(user: User, blogEntry: BlogEntry): Observable<BlogEntry> {
+        blogEntry.author = user;
+
+        return this.generateSlug(blogEntry.title).pipe(
+            switchMap((slug: string) => {
+                blogEntry.slug = slug;
+                return from(this.blogRepository.save(blogEntry));
+            })
+        );
     }
 
-    indexBlogByUser(page, limit, userId): Observable<any> {
-        return this.client.send("indexBlogByUser", { page, limit, userId });
+    updateOneBlog(id: number, blogEntry: BlogEntry): Observable<BlogEntry> {
+        return from(this.blogRepository.update(id, blogEntry)).pipe(switchMap(() => this.findOneBlog(id)));
     }
 
-    findOneBlog(id): Observable<BlogEntry> {
-        return this.client.send("findOneBlog", { id });
+    deleteOneBlog(id: number): Observable<any> {
+        return from(this.blogRepository.delete(id));
     }
 
-    updateOneBlog(id, blogEntry): Observable<BlogEntry> {
-        return this.client.send("updateOneBlog", { id, blogEntry });
+    findOneBlog(id: number): Observable<BlogEntry> {
+        return from(this.blogRepository.findOne({ where: { id }, relations: ["author"] }));
     }
 
-    deleteOneBlog(id): Observable<any> {
-        return this.client.send("deleteOneBlog", { id });
+    findAllBlog(): Observable<BlogEntry[]> {
+        return from(this.blogRepository.find({ relations: ["author"] }));
     }
+
+    findAllBlogByUser(userId: number): Observable<BlogEntry[]> {
+        return from(
+            this.blogRepository.find({
+                where: {
+                    author: Equal(userId),
+                },
+                relations: ["author"],
+            })
+        ).pipe(map((blogEntries: BlogEntry[]) => blogEntries));
+    }
+
+    // paginateAll(page: number, limit: number): Observable<Pagination<BlogEntry>> {
+    //     limit = limit > 100 ? 100 : limit;
+
+    //     const options: IPaginationOptions = {
+    //         limit: Number(limit),
+    //         page: Number(page),
+    //         route: this.blogUrl,
+    //     };
+
+    //     return from(
+    //         paginate<BlogEntry>(this.blogRepository, options, {
+    //             relations: ["author"],
+    //         })
+    //     ).pipe(map((blogEntries: Pagination<BlogEntry>) => blogEntries));
+    // }
+
+    // paginateAllByUser(page: number, limit: number, userId: number): Observable<Pagination<BlogEntry>> {
+    //     limit = limit > 100 ? 100 : limit;
+
+    //     const options: IPaginationOptions = {
+    //         limit: Number(limit),
+    //         page: Number(page),
+    //         route: this.blogUrl + "/user/" + userId,
+    //     };
+
+    //     return from(
+    //         paginate<BlogEntry>(this.blogRepository, options, {
+    //             relations: ["author"],
+    //             where: [{ author: Equal(userId) }],
+    //         })
+    //     ).pipe(map((blogEntries: Pagination<BlogEntry>) => blogEntries));
+    // }
 }
