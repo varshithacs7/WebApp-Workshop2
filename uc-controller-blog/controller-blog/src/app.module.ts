@@ -6,5 +6,12 @@ import { AppService } from "./app.service";
     imports: [ConfigModule.forRoot({ isGlobal: true })],
     controllers: [AppController],
     providers: [AppService],
+    TypeOrmModule.forRoot({
+            type: "postgres",
+            url: process.env.DATABASE_URL,
+            autoLoadEntities: true,
+            synchronize: true,
+        }),
+        TypeOrmModule.forFeature([UserEntity, BlogEntryEntity]),
 })
 export class AppModule {}
